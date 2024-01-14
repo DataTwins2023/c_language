@@ -21,30 +21,50 @@ void inorder(struct node* n){
     }
 }
 
-void get_suc_leaf(struct node* root, int target){
-    struct node* root_l  = root -> left;
-    if(root_l -> right){ 
-        root_l = root_l -> right;
-    };// 找左子max
-    if(root_l -> data == target){
-        printf("%d\n", root -> data);
+void get_suc(struct node* root, int target){
+    struct node* temp = root;
+    while(temp ->right)
+    {
+        temp = temp->right;
     }
-    else{
-        if(root_l -> data > target){
-            get_suc_leaf(root -> left, target);
+    /*first, we need to determine the node is max of the tree or not*/
+    if(temp -> data == target)
+    {
+        printf("%s\n", "it's max of the tree, no successor");
+    }
+    /*if it's not the max, we can start too find the successor*/
+    else
+    {
+        /*找左tree max，其實就是precessor*/
+        /*如果沒有左tree 則successor是右子點*/
+        if(root->left)
+        {
+            struct node* root_l_max = root->left;
+            while(root_l_max -> right)
+            {
+                root_l_max = root_l_max->right;
+            }
+            /*if root's precessor value equal to target then we can say root is the scuccessor of target*/
+            if(root_l_max->data == target)
+            {
+                printf("%d\n", root->data);
+            }
+            /*root's precessor value isn't equal to target*/
+            else{
+                if (root_l_max -> data > target)
+                {
+                    get_suc(root->left, target);
+                }
+                else
+                {
+                    get_suc(root->right, target);
+                }
+            }
         }
-        else if(root_l -> data < target){
-            get_suc_leaf(root -> right, target);
+        else{
+            printf("%d\n", root->right->data);
         }
     }
-}
-
-void get_suc_nonleaf(struct node* c){
-    c = c -> right;
-    if(c -> left){ // c有right_son
-        c = c -> left;
-    }
-    printf("%d\n", c -> data);
 }
 
 
@@ -56,6 +76,6 @@ int main()
     struct node l1_right = {6, &l2_right, NULL};
     struct node root     = {5, &l1_right, &l1_left};
     
-    get_suc_leaf(&root, 2);
+    get_suc(&root, 6);
     return 0;
 }
