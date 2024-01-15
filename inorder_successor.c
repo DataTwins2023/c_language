@@ -32,7 +32,7 @@ void get_suc(struct node* root, int target){
     {
         printf("%s\n", "it's max of the tree, no successor");
     }
-    /*if it's not the max, we can start too find the successor*/
+    /*if it's not the max, we can start to find the successor*/
     else
     {
         /*找左tree max，其實就是precessor*/
