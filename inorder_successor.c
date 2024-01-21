@@ -56,7 +56,7 @@ void get_suc(struct node* root, int target){
         {
             temp = temp -> left;
         }
-        printf("%d\n", temp ->data);z
+        printf("%d\n", temp ->data);
     }
     else
     {
