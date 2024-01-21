@@ -48,9 +48,15 @@ void get_suc(struct node* root, int target){
     }
     /* search for target */
     struct node* target_node = search_target(root, target);
+    /* the smallest node of right subtree of target is its successor */
     if(target_node -> right)
     {
-        printf("%d\n", target_node->right->data);
+        struct node* temp = target_node -> right;
+        while(temp -> left)
+        {
+            temp = temp -> left;
+        }
+        printf("%d\n", temp ->data);z
     }
     else
     {
@@ -95,6 +101,6 @@ int main()
     struct node l1_right = {6, &l2_right, NULL};
     struct node root     = {5, &l1_right, &l1_left};
     
-    get_suc(&root, 3);
+    get_suc(&root, 6);
     return 0;
 }
