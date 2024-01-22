@@ -39,7 +39,7 @@ public:
         {
             if(StudentHashTable[slotID] -> studentID == sID)
             {
-            cout << StudentHashTable[slotID] -> name << endl;
+                cout << StudentHashTable[slotID] -> name << endl;
             };
             StudentHashTable[slotID] = StudentHashTable[slotID] -> next
         }
